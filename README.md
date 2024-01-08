@@ -1,2 +1,2 @@
-# graph-cross-attention
+# Graph Cross Attention
 Integrating both simple edge and hyperedge information using cross-attention to perform multi-modal learning on complex graphs.
