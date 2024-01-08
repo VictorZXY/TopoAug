@@ -1,5 +1,6 @@
 from models.allset import SetGNN
 from models.average_ensemble import AverageEnsemble
+from models.cross_atten import CAGCNHyperGCN, CASAGEHyperGCN
 from models.diffpool import DiffPool
 from models.edgnn import EquivSetGNN
 from models.gat import GATNet, GATv2Net
@@ -23,14 +24,17 @@ factory = {
     'hyper-gcn': HyperGCN,
     'hyper-gat': HyperAtten,
     'ensemble': AverageEnsemble,
+    'ogb-gcn': OGBGCN,
+    'ogb-sage': OGBSAGE,
+    'ogb-hypersage': OGBHyperSAGE,
+    'diff': DiffPool,
+    'edgnn': EquivSetGNN,
     'lp-gcn-hyper-gcn': LPGCNHyperGCN,
     'lp-gat-hyper-gcn': LPGATHyperGCN,
     'lp-gat-gcn': LPGATGCN,
     'lp-gcn-gcn': LPGCNGCN,
     'lp-gat-gat': LPGATGAT,
     'lp-hyper-hyper': LPHyperHyper,
-    'diff': DiffPool,
-    'ogb-gcn': OGBGCN,
-    'ogb-sage': OGBSAGE,
-    'ogb-hypersage': OGBHyperSAGE,
+    'ca-gcn-hyper-gcn': CAGCNHyperGCN,
+    'ca-sage-hyper-gcn': CASAGEHyperGCN,
 }
