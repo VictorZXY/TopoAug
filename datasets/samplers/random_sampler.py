@@ -71,7 +71,7 @@ class RandomHyperedgeSampler(torch.utils.data.DataLoader):
     # WARNING: THIS METHOD CAN GET VERY SLOW FOR LARGE SAMPLES.
     def __init__(self, data, num_samples, min_sample_size, mask=None, **kwargs):
         # Remove for PyTorch Lightning:
-        # TODO: Copied from torch_geometric.loader.graph_saint.GraphSAINTSampler. Not sure if it is needed
+        # Copied from torch_geometric.loader.graph_saint.GraphSAINTSampler. Not sure if it is needed
         kwargs.pop('dataset', None)
         kwargs.pop('collate_fn', None)
 
