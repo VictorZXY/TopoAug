@@ -30,4 +30,7 @@ __all__ = ['Grand', 'GitHub', 'Facebook', 'Twitch', 'Wikipedia', 'Amazon', "OGB"
            'HypergraphSAINTSampler', 'HypergraphSAINTNodeSampler',
            'HypergraphSAINTEdgeSampler', 'HypergraphSAINTRandomWalkSampler',
            "RandomNodeSampler", "RandomHyperedgeSampler",
-           "GraphSAINTRandomWalkSampler", "NeighborSampler"]
+           "GraphSAINTRandomWalkSampler", "NeighborSampler",
+           "load_HGB_dataset", "load_LE_dataset", "load_yelp_dataset",
+           "load_cornell_dataset", "load_citation_dataset",
+           "AddHypergraphSelfLoops", "HypergraphDataset", "HypergraphDiffusionDataset"]

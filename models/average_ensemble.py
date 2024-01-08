@@ -1,9 +1,9 @@
 import torch
 
-from gat import GATNet, GATv2Net
-from gcn import GCNNet
-from graphsage import SAGENet
-from hyper_conv_atten import HyperConv, HyperAtten
+from models.gat import GATNet, GATv2Net
+from models.gcn import GCNNet
+from models.graphsage import SAGENet
+from models.hyper_conv_atten import HyperConv, HyperAtten
 
 mapstr2model = {
     'gcn': GCNNet,

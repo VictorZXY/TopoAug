@@ -129,7 +129,7 @@ def get_dataset(name, datasets_path=os.path.join(pathlib.Path(__file__).parent.p
 
 
 def get_dataset_single(name,
-                       datasets_path=os.path.join(pathlib.Path(__file__).parent.parent.parent.resolve(), 'datasets'),
+                       datasets_path=os.path.join(pathlib.Path(__file__).parent.parent.resolve(), 'datasets'),
                        original_mask=False, split=0.6, batch_size=6000, workers=2, num_steps=5,
                        sampler_type='HypergraphSAINTNodeSampler'):
     # if datasets_path not in sys.path:
@@ -156,20 +156,20 @@ def get_dataset_single(name,
 
 
 def load_HGB_dataset(path, dataset):
-    ori_dataset = get_dataset_single(dataset)
-    print(ori_dataset)
+    original_dataset = get_dataset_single(dataset)
+    print(original_dataset)
     data = Data(
-        x=ori_dataset.x,
-        y=ori_dataset.y,
-        num_hyperedges=ori_dataset.num_hyperedges)
+        x=original_dataset.x,
+        y=original_dataset.y,
+        num_hyperedges=original_dataset.num_hyperedges)
 
     data.num_features = data.x.shape[-1]
-    data.num_classes = len(np.unique(ori_dataset.y.numpy()))
+    data.num_classes = len(np.unique(original_dataset.y.numpy()))
     data.num_nodes = data.x.shape[0]
     print("running function load_HGB_dataset")
 
     # increase the hyperedge_index by the number of nodes.
-    edge_index = ori_dataset.hyperedge_index
+    edge_index = original_dataset.hyperedge_index
     print(edge_index)
 
     # for node not in hyperedge, add a self-loop to it.

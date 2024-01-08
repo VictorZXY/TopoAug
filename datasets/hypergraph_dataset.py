@@ -6,7 +6,7 @@ import torch
 import torch_geometric
 from torch_geometric.data import InMemoryDataset
 
-from data_utils import load_citation_dataset, load_LE_dataset, \
+from datasets import load_citation_dataset, load_LE_dataset, \
     load_yelp_dataset, load_cornell_dataset, load_HGB_dataset
 
 
@@ -230,10 +230,10 @@ class HypergraphDiffusionDataset(HypergraphDataset):
                                                          feature_noise=1.0, transform=None,
                                                          pre_transform=None)  # dumy feature noise
 
-        self.x = torch.tensor(np.load(os.path.join(self.raw_dir, 'x.npy')))[
-            ..., None].float()  # [num_instances, num_nodes, num_feats]
-        self.y = torch.tensor(np.load(os.path.join(self.raw_dir, 'y.npy')))[
-            ..., None].float()  # [num_instances, num_nodes, num_feats]
+        # [num_instances, num_nodes, num_feats]
+        self.x = torch.tensor(np.load(os.path.join(self.raw_dir, 'x.npy')))[..., None].float()
+        # [num_instances, num_nodes, num_feats]
+        self.y = torch.tensor(np.load(os.path.join(self.raw_dir, 'y.npy')))[..., None].float()
 
     @property
     def num_features(self):
