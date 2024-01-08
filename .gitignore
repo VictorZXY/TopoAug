@@ -165,6 +165,7 @@ cython_debug/
 
 # graph-cross-attention
 data/
-raw_data/
+data_reformatted/
+data_raw/
 playground.*
 *.pt
