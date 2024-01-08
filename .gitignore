@@ -159,5 +159,12 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-# Project related
+# macOS
+._*
+.DS_Store
+
+# graph-cross-attention
 data/
+raw_data/
+playground.*
+*.pt
