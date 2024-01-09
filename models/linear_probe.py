@@ -21,7 +21,7 @@ class LPGCNHyperGCN(torch.nn.Module):
             self.hyper2 = HypergraphConv(dim, info["num_classes"])
             self.lp = nn.Linear(2 * info["num_classes"], info["num_classes"])
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index, hyperedge_index = data.x, data.edge_index, data.hyperedge_index
         x_gcn = F.relu(self.conv1(x, edge_index))
         x_hyper = F.relu(self.hyper1(x, hyperedge_index))
@@ -55,7 +55,7 @@ class LPGATHyperGCN(torch.nn.Module):
             self.hyper2 = GAT(dim, info["num_classes"], num_layers=1)
             self.lp = nn.Linear(2 * info["num_classes"], info["num_classes"])
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index, hyperedge_index = data.x, data.edge_index, data.hyperedge_index
         x_gcn = F.relu(self.conv1(x, edge_index))
         x_hyper = F.relu(self.hyper1(x, hyperedge_index))
@@ -89,7 +89,7 @@ class LPGATGCN(torch.nn.Module):
             self.hyper2 = GAT(dim, info["num_classes"], num_layers=1)
             self.lp = nn.Linear(2 * info["num_classes"], info["num_classes"])
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index, hyperedge_index = data.x, data.edge_index, data.hyperedge_index
         x_gcn = F.relu(self.conv1(x, edge_index))
         x_hyper = F.relu(self.hyper1(x, edge_index))
@@ -123,7 +123,7 @@ class LPGATGAT(torch.nn.Module):
             self.hyper2 = GAT(dim, info["num_classes"], num_layers=1)
             self.lp = nn.Linear(2 * info["num_classes"], info["num_classes"])
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index, hyperedge_index = data.x, data.edge_index, data.hyperedge_index
         x_gcn = F.relu(self.conv1(x, edge_index))
         x_hyper = F.relu(self.hyper1(x, edge_index))
@@ -158,7 +158,7 @@ class LPGCNGCN(torch.nn.Module):
             self.conv2 = GCNConv(dim, info["num_classes"])
             self.lp = nn.Linear(2 * info["num_classes"], info["num_classes"])
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index, hyperedge_index = data.x, data.edge_index, data.hyperedge_index
         x_gcn = F.relu(self.conv1(x, edge_index))
         x_hyper = F.relu(self.hyper1(x, edge_index))
@@ -193,7 +193,7 @@ class LPHyperHyper(torch.nn.Module):
             self.hyper2 = HypergraphConv(dim, info["num_classes"])
             self.lp = nn.Linear(2 * info["num_classes"], info["num_classes"])
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index, hyperedge_index = data.x, data.edge_index, data.hyperedge_index
         x_gcn = F.relu(self.conv1(x, hyperedge_index))
         x_hyper = F.relu(self.hyper1(x, hyperedge_index))

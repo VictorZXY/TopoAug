@@ -20,7 +20,7 @@ class SAGENet(torch.nn.Module):
 
         self.conv1 = SAGEConv(info["num_node_features"], dim, normalize=False)
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index = data.x, data.edge_index
         if self.is_edge_pred:
             edge_index = args[0][0]  # the message passing edge index
@@ -67,7 +67,7 @@ class OGBSAGE(torch.nn.Module):
         for conv in self.convs:
             conv.reset_parameters()
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, adj_t = data.x, data.edge_index
         for conv in self.convs[:-1]:
             x = conv(x, adj_t)

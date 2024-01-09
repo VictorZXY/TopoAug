@@ -127,7 +127,7 @@ class OGBHyperSAGE(torch.nn.Module):
         for conv in self.convs:
             conv.reset_parameters()
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, adj_t, hyperedge_index = data.x, data.edge_index, data.hyperedge_index
         for conv in self.convs[:-1]:
             x = conv(x, adj_t)

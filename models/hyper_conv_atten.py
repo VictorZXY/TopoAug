@@ -20,7 +20,7 @@ class HyperConv(torch.nn.Module):
         else:
             self.conv2 = HypergraphConv(dim, info["num_classes"])
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index = data.x, data.hyperedge_index
         if self.is_edge_pred:
             edge_index = args[0][0]  # the message passing edge index
@@ -58,7 +58,7 @@ class HyperAtten(torch.nn.Module):
         self.conv1 = HypergraphConv(
             info["num_node_features"], dim, use_attention=True, heads=heads)
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index = data.x, data.hyperedge_index
         if self.is_edge_pred:
             edge_index = args[0][0]  # the message passing edge index

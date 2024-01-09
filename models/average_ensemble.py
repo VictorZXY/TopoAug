@@ -40,7 +40,7 @@ class AverageEnsemble(torch.nn.Module):
         self.model1 = plt_model_load(self.model1, info["checkpoint1"])
         self.model2 = plt_model_load(self.model2, info["checkpoint2"])
 
-    def forward(self, data, *args, **kargs):
-        x1 = self.model1(data, *args, **kargs)
-        x2 = self.model2(data, *args, **kargs)
+    def forward(self, data, *args, **kwargs):
+        x1 = self.model1(data, *args, **kwargs)
+        x2 = self.model2(data, *args, **kwargs)
         return (x1 + x2) / 2

@@ -57,7 +57,7 @@ class DiffPool(torch.nn.Module):
         else:
             self.lin2 = torch.nn.Linear(32, info["num_classes"])
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, adj = data.x, data.edge_index
         adj = to_dense_adj(adj)[0]
         # print(f"X before pool0: {x.shape}")

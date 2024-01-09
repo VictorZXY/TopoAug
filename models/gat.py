@@ -19,7 +19,7 @@ class GATNet(torch.nn.Module):
         else:
             self.conv2 = GAT(dim, info["num_classes"], num_layers=1)
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index = data.x, data.edge_index
         if self.is_edge_pred:
             edge_index = args[0][0]  # the message passing edge index
@@ -56,7 +56,7 @@ class GATv2Net(torch.nn.Module):
         self.conv1 = GAT(
             info["num_node_features"], dim, v2=True, num_layers=1)
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index = data.x, data.edge_index
         if self.is_edge_pred:
             edge_index = args[0][0]  # the message passing edge index

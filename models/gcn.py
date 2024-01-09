@@ -19,7 +19,7 @@ class GCNNet(torch.nn.Module):
         else:
             self.conv2 = GCNConv(dim, info["num_classes"])
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, edge_index = data.x, data.edge_index
         if self.is_edge_pred:
             edge_index = args[0][0]  # the message passing edge index
@@ -72,7 +72,7 @@ class OGBGCN(torch.nn.Module):
         for conv in self.convs:
             conv.reset_parameters()
 
-    def forward(self, data, *args, **kargs):
+    def forward(self, data, *args, **kwargs):
         x, adj_t = data.x, data.adj_t
         for conv in self.convs[:-1]:
             x = conv(x, adj_t)
