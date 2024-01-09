@@ -145,18 +145,22 @@ def get_dataset_single(name,
     # fix random seeds
     np.random.seed(1)
     torch.manual_seed(1)
+
     info = dict(DATASET_INFO[name])
     dataset_info = info.pop('info', {})
+
     single_graph = info.pop('single_graph', False)
     onehot = info.pop('onehot', False)
+
     cls = getattr(datasets, info.pop('type'))
     print(info)
     dataset = cls(**info)
-    return dataset[0]
+
+    return dataset[0], dataset_info
 
 
 def load_HGB_dataset(path, dataset):
-    original_dataset = get_dataset_single(dataset)
+    original_dataset, _ = get_dataset_single(dataset)
     print(original_dataset)
     data = Data(
         x=original_dataset.x,

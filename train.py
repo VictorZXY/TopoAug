@@ -10,7 +10,10 @@ import torch_geometric
 
 import datasets
 import utils
-from models import EquivSetGNN, HCHA, HNHN, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII
+from models import (
+    EquivSetGNN, HCHA, HNHN, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII,
+    LPGCNEDGNN, LPGATEDGNN, LPEDGNNHyper, LPEDGNNEDGNN
+)
 
 
 @torch.no_grad()
@@ -18,6 +21,9 @@ def evaluate(model, data, split_idx, evaluator, loss_fn=None, return_out=False):
     model.eval()
     out = model(data)
     out = F.log_softmax(out, dim=1)
+
+    if isinstance(data, tuple):
+        data = data[0]
 
     train_acc = evaluator.eval(data.y[split_idx['train']], out[split_idx['train']])['acc']
     valid_acc = evaluator.eval(data.y[split_idx['valid']], out[split_idx['valid']])['acc']
@@ -43,14 +49,16 @@ def main(args):
         device = torch.device('cuda:' + str(args.cuda) if torch.cuda.is_available() else 'cpu')
     else:
         device = torch.device('cpu')
+
     if args.method not in ['HyperGCN', 'HyperSAGE']:
         transform = torch_geometric.transforms.Compose([datasets.AddHypergraphSelfLoops()])
     else:
         transform = None
+
     print(f"dataset name: {args.dname} ")
     data = datasets.HypergraphDataset(root=args.data_dir, name=args.dname, path_to_download=args.raw_data_dir,
                                       feature_noise=args.feature_noise, transform=transform).data
-    print(data)
+    data_info = None
     if args.method in ['AllSetTransformer', 'AllDeepSets']:
         data = SetGNN.norm_contruction(data, option=args.normtype)
     elif args.method == 'HNHN':
@@ -59,13 +67,27 @@ def main(args):
         data = HyperSAGE.generate_hyperedge_dict(data)
     elif args.method == 'LEGCN':
         data = LEGCN.line_expansion(data)
-    data = data.to(device)
+    elif args.method in ['LPGCNEDGNN', 'LPGATEDGNN', 'LPEDGNNHyper']:
+        hgb_data, data_info = datasets.get_dataset_single(args.dname)
+        data = (hgb_data, data)
+    elif args.method == 'LPEDGNNEDGNN':
+        _, data_info = datasets.get_dataset_single(args.dname)
+    print(data)
+    if isinstance(data, tuple):
+        data = tuple(map(lambda item: item.to(device), data))
+    else:
+        data = data.to(device)
 
     # Get splits
     split_idx_lst = []
     for run in range(args.runs):
-        split_idx = utils.rand_train_test_idx(
-            data.y, train_prop=args.train_prop, valid_prop=args.valid_prop)
+        if isinstance(data, tuple):
+            assert all(torch.equal(data[0].y, item.y) for item in data), 'Labels in different data formats do not match'
+            split_idx = utils.rand_train_test_idx(
+                data[0].y, train_prop=args.train_prop, valid_prop=args.valid_prop)
+        else:
+            split_idx = utils.rand_train_test_idx(
+                data.y, train_prop=args.train_prop, valid_prop=args.valid_prop)
         split_idx_lst.append(split_idx)
 
     if args.method == 'AllSetTransformer':
@@ -96,6 +118,18 @@ def main(args):
         model = HyperND(data.num_features, data.num_classes, args)
     elif args.method == 'EDGNN':
         model = EquivSetGNN(data.num_features, data.num_classes, args)
+    elif args.method == 'LPGCNEDGNN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPGCNEDGNN(data_info, args)
+    elif args.method == 'LPGATEDGNN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPGATEDGNN(data_info, args)
+    elif args.method == 'LPEDGNNHyper':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPEDGNNHyper(data_info, args)
+    elif args.method == 'LPEDGNNEDGNN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPEDGNNEDGNN(data_info, args)
     else:
         raise ValueError(f'Undefined model name: {args.method}')
     model = model.to(device)
@@ -122,7 +156,10 @@ def main(args):
             optimizer.zero_grad()
             out = model(data)
             out = F.log_softmax(out, dim=1)
-            loss = loss_fn(out[train_idx], data.y[train_idx])
+            if isinstance(data, tuple):
+                loss = loss_fn(out[train_idx], data[0].y[train_idx])
+            else:
+                loss = loss_fn(out[train_idx], data.y[train_idx])
             loss.backward()
             optimizer.step()
 

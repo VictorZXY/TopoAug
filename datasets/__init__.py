@@ -2,6 +2,7 @@ from torch_geometric.loader import GraphSAINTRandomWalkSampler, NeighborSampler
 
 from datasets.amazon import Amazon
 from datasets.data_utils import (
+    get_dataset_single,
     load_HGB_dataset,
     load_LE_dataset,
     load_yelp_dataset,
