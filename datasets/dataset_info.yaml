@@ -1,8 +1,8 @@
 grand_ArteryAorta:
   type: Grand
   name: Artery_Aorta
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -15,8 +15,8 @@ grand_ArteryAorta:
 grand_ArteryCoronary:
   type: Grand
   name: Artery_Coronary
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -29,8 +29,8 @@ grand_ArteryCoronary:
 grand_Breast:
   type: Grand
   name: Breast
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -43,8 +43,8 @@ grand_Breast:
 grand_Brain:
   type: Grand
   name: Brain
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -57,8 +57,8 @@ grand_Brain:
 grand_Lung:
   type: Grand
   name: Lung
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -71,8 +71,8 @@ grand_Lung:
 grand_Stomach:
   type: Grand
   name: Stomach
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -85,8 +85,8 @@ grand_Stomach:
 grand_Leukemia:
   type: Grand
   name: Leukemia
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -99,8 +99,8 @@ grand_Leukemia:
 grand_LungCancer:
   type: Grand
   name: Lung_Cancer
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -113,8 +113,8 @@ grand_LungCancer:
 grand_StomachCancer:
   type: Grand
   name: Stomach_Cancer
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -127,8 +127,8 @@ grand_StomachCancer:
 grand_KidneyCancer:
   type: Grand
   name: Kidney_renal_papillary_cell_carcinoma
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
-  root: data/grand  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
+  # root: data/grand  # Local
   single_graph: true
   info:
     original_mask: false
@@ -141,8 +141,8 @@ grand_KidneyCancer:
 musae_Twitch_DE:
   type: Twitch
   name: DE
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
-  root: data/musae  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
+  # root: data/musae  # Local
   single_graph: true
   info:
     original_mask: false
@@ -155,8 +155,8 @@ musae_Twitch_DE:
 musae_Twitch_EN:
   type: Twitch
   name: EN
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
-  root: data/musae  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
+  # root: data/musae  # Local
   single_graph: true
   info:
     original_mask: false
@@ -169,8 +169,8 @@ musae_Twitch_EN:
 musae_Twitch_ES:
   type: Twitch
   name: ES
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
-  root: data/musae  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
+  # root: data/musae  # Local
   single_graph: true
   info:
     original_mask: false
@@ -183,8 +183,8 @@ musae_Twitch_ES:
 musae_Twitch_FR:
   type: Twitch
   name: FR
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
-  root: data/musae  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
+  # root: data/musae  # Local
   single_graph: true
   info:
     original_mask: false
@@ -197,8 +197,8 @@ musae_Twitch_FR:
 musae_Twitch_PT:
   type: Twitch
   name: PT
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
-  root: data/musae  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
+  # root: data/musae  # Local
   single_graph: true
   info:
     original_mask: false
@@ -211,8 +211,8 @@ musae_Twitch_PT:
 musae_Twitch_RU:
   type: Twitch
   name: RU
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
-  root: data/musae  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
+  # root: data/musae  # Local
   single_graph: true
   info:
     original_mask: false
@@ -224,8 +224,8 @@ musae_Twitch_RU:
 
 musae_Facebook:
   type: Facebook
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae/facebook  # Cirrus HPC
-  root: data/musae/facebook  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae/facebook  # Cirrus HPC
+  # root: data/musae/facebook  # Local
   single_graph: true
   info:
     original_mask: false
@@ -237,8 +237,8 @@ musae_Facebook:
 
 musae_Github:
   type: GitHub
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae/github  # Cirrus HPC
-  root: data/musae/github  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae/github  # Cirrus HPC
+  # root: data/musae/github  # Local
   single_graph: true
   info:
     original_mask: false
@@ -250,8 +250,8 @@ musae_Github:
 
 musae_Wiki_chameleon:
   type: Wikipedia
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
-  root: data/musae  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
+  # root: data/musae  # Local
   name: chameleon
   single_graph: true
   info:
@@ -263,8 +263,8 @@ musae_Wiki_chameleon:
 
 musae_Wiki_crocodile:
   type: Wikipedia
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
-  root: data/musae  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
+  # root: data/musae  # Local
   name: crocodile
   single_graph: true
   info:
@@ -276,8 +276,8 @@ musae_Wiki_crocodile:
 
 musae_Wiki_squirrel:
   type: Wikipedia
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
-  root: data/musae  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/musae  # Cirrus HPC
+  # root: data/musae  # Local
   name: squirrel
   single_graph: true
   info:
@@ -290,8 +290,8 @@ musae_Wiki_squirrel:
 amazon_Photo:
   type: Amazon
   name: Photos
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/amazon  # Cirrus HPC
-  root: data/amazon  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/amazon  # Cirrus HPC
+  # root: data/amazon  # Local
   single_graph: true
   info:
     original_mask: false
@@ -304,8 +304,8 @@ amazon_Photo:
 amazon_Computer:
   type: Amazon
   name: Computers
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/amazon  # Cirrus HPC
-  root: data/amazon  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/amazon  # Cirrus HPC
+  # root: data/amazon  # Local
   single_graph: true
   info:
     original_mask: false
@@ -318,8 +318,8 @@ amazon_Computer:
 benchmark_Cora_Author:
   type: Benchmark
   name: CoraAuthor
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/benchmark  # Cirrus HPC
-  root: data/benchmark  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/benchmark  # Cirrus HPC
+  # root: data/benchmark  # Local
   single_graph: true
   info:
     original_mask: false
@@ -331,8 +331,8 @@ benchmark_Cora_Author:
 benchmark_Cora_Cite:
   type: Benchmark
   name: CoraCite
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/benchmark  # Cirrus HPC
-  root: data/benchmark  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/benchmark  # Cirrus HPC
+  # root: data/benchmark  # Local
   single_graph: true
   info:
     original_mask: false
@@ -344,8 +344,8 @@ benchmark_Cora_Cite:
 benchmark_Pubmed:
   type: Benchmark
   name: Pubmed
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/benchmark  # Cirrus HPC
-  root: data/benchmark  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/benchmark  # Cirrus HPC
+  # root: data/benchmark  # Local
   single_graph: true
   info:
     original_mask: false
@@ -357,8 +357,8 @@ benchmark_Pubmed:
 OGB_arxiv:
   type: OGB
   name: arxiv
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/ogb  # Cirrus HPC
-  root: data/ogb  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/ogb  # Cirrus HPC
+  # root: data/ogb  # Local
   single_graph: false
   info:
     original_mask: true
@@ -370,8 +370,8 @@ OGB_arxiv:
 OGB_products:
   type: OGB
   name: products
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/ogb  # Cirrus HPC
-  root: data/ogb  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/ogb  # Cirrus HPC
+  # root: data/ogb  # Local
   single_graph: false
   info:
     original_mask: true
@@ -383,8 +383,8 @@ OGB_products:
 OGB_proteins:
   type: OGB
   name: proteins
-  # root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/ogb  # Cirrus HPC
-  root: data/ogb  # Local
+  root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/ogb  # Cirrus HPC
+  # root: data/ogb  # Local
   single_graph: false
   info:
     original_mask: true

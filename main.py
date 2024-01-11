@@ -14,12 +14,12 @@ datasets = ["musae_Github"]
 # Update the dataset names and directories as needed
 for dataset in datasets:
     # Cirrus HPC
-    # data_dir = f"/work/ec249/ec249/xz9118/Projects/graph-cross-attention/data_reformatted/{dataset.lower()}"
-    # raw_data_dir = f"/work/ec249/ec249/xz9118/Projects/graph-cross-attention/data_raw/"
+    data_dir = f"/work/ec249/ec249/xz9118/Projects/graph-cross-attention/data_reformatted/{dataset.lower()}"
+    raw_data_dir = f"/work/ec249/ec249/xz9118/Projects/graph-cross-attention/data_raw/"
 
     # Local
-    data_dir = f"data_reformatted/{dataset.lower()}"
-    raw_data_dir = f"data_raw/"
+    # data_dir = f"data_reformatted/{dataset.lower()}"
+    # raw_data_dir = f"data_raw/"
 
     command = f"CUDA_VISIBLE_DEVICES='2' python train.py --method LPGCNEDGNN --dname {dataset} " \
               f"--All_num_layers 2 --MLP_num_layers 2 --MLP2_num_layers 2 --MLP3_num_layers 2 " \
