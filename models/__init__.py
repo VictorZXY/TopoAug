@@ -14,7 +14,8 @@ from models.hypernd import HyperND
 from models.hypersage import HyperSAGE, OGBHyperSAGE
 from models.legcn import LEGCN
 from models.linear_probe import (
-    LPGCNHyperGCN, LPGATHyperGCN, LPGCNEDGNN, LPGATEDGNN, LPGCNGCN, LPGATGAT, LPGATGCN,
+    LPGCNHyperGCN, LPGATHyperGCN, LPSAGEHyperGCN, LPGCNEDGNN, LPGATEDGNN, LPSAGEEDGNN,
+    LPGCNGCN, LPGATGAT, LPGATGCN, LPSAGEGAT, LPSAGEGCN, LPSAGESAGE,
     LPHyperHyper, LPEDGNNHyper, LPEDGNNEDGNN
 )
 from models.unigcn2 import UniGCNII
@@ -34,11 +35,16 @@ factory = {
     'edgnn': EquivSetGNN,
     'lp-gcn-hyper-gcn': LPGCNHyperGCN,
     'lp-gat-hyper-gcn': LPGATHyperGCN,
+    'lp-sage-hyper-gcn': LPSAGEHyperGCN,
     'lp-gcn-edhnn': LPGCNEDGNN,
     'lp-gat-edhnn': LPGATEDGNN,
+    'lp-sage-edhnn': LPSAGEEDGNN,
+    'lp-sage-gcn': LPSAGEGCN,
+    'lp-sage-gat': LPSAGEGAT,
+    'lp-sage-sage': LPSAGESAGE,
     'lp-gat-gcn': LPGATGCN,
-    'lp-gcn-gcn': LPGCNGCN,
     'lp-gat-gat': LPGATGAT,
+    'lp-gcn-gcn': LPGCNGCN,
     'lp-hyper-hyper': LPHyperHyper,
     'lp-edhnn-hyper': LPEDGNNHyper,
     'lp-edhnn-edhnn': LPEDGNNEDGNN,

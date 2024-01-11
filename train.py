@@ -12,7 +12,7 @@ import datasets
 import utils
 from models import (
     EquivSetGNN, HCHA, HNHN, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII,
-    LPGCNEDGNN, LPGATEDGNN, LPEDGNNHyper, LPEDGNNEDGNN
+    LPGCNEDGNN, LPGATEDGNN, LPSAGEEDGNN, LPSAGEHyperGCN, LPSAGEGCN, LPSAGEGAT, LPSAGESAGE, LPEDGNNHyper, LPEDGNNEDGNN
 )
 
 
@@ -67,9 +67,11 @@ def main(args):
         data = HyperSAGE.generate_hyperedge_dict(data)
     elif args.method == 'LEGCN':
         data = LEGCN.line_expansion(data)
-    elif args.method in ['LPGCNEDGNN', 'LPGATEDGNN', 'LPEDGNNHyper']:
+    elif args.method in ['LPGCNEDGNN', 'LPGATEDGNN', 'LPSAGEEDGNN', 'LPEDGNNHyper']:
         hgb_data, data_info = datasets.get_dataset_single(args.dname)
         data = (hgb_data, data)
+    elif args.method in ['LPSAGEHyperGCN', 'LPSAGEGCN', 'LPSAGEGAT', 'LPSAGESAGE']:
+        data, data_info = datasets.get_dataset_single(args.dname)
     elif args.method == 'LPEDGNNEDGNN':
         _, data_info = datasets.get_dataset_single(args.dname)
     print(data)
@@ -124,6 +126,21 @@ def main(args):
     elif args.method == 'LPGATEDGNN':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPGATEDGNN(data_info, args)
+    elif args.method == 'LPSAGEEDGNN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPSAGEEDGNN(data_info, args)
+    elif args.method == 'LPSAGEHyperGCN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPSAGEHyperGCN(data_info, args)
+    elif args.method == 'LPSAGEGCN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPSAGEGCN(data_info, args)
+    elif args.method == 'LPSAGEGAT':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPSAGEGAT(data_info, args)
+    elif args.method == 'LPSAGESAGE':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPSAGESAGE(data_info, args)
     elif args.method == 'LPEDGNNHyper':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPEDGNNHyper(data_info, args)
