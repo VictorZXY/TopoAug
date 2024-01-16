@@ -168,8 +168,8 @@ cython_debug/
 
 # graph-cross-attention
 data/
-data_reformatted/
 data_raw/
+data_reformatted/
 playground.*
 slurm
 *.out
