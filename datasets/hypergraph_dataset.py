@@ -53,12 +53,13 @@ class HypergraphDataset(InMemoryDataset):
     cornell_list = ['amazon-reviews', 'walmart-trips', 'house-committees', 'congress-bills', 'senate-committees'] + \
                    ['synthetic-0.1', 'synthetic-0.15', 'synthetic-0.2', 'synthetic-0.3', 'synthetic-0.35',
                     'synthetic-0.4', 'synthetic-0.5']
-    HGB_list = ["musae_Twitch_ES", "musae_Twitch_FR", "musae_Twitch_EN",
+    HGB_list = ["musae_Facebook", "musae_Github",
+                "musae_Twitch_ES", "musae_Twitch_FR", "musae_Twitch_EN",
                 "musae_Twitch_PT", "musae_Twitch_RU", "musae_Twitch_DE",
-                "grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain",
-                "grand_Leukemia", "grand_Lung", "grand_Stomach", "grand_Lungcancer", "grand_Stomachcancer",
-                "grand_KidneyCancer", "amazon_Photo", "amazon_Computer",
-                "musae_Facebook", "musae_Github"]
+                "musae_Wiki_chameleon", "musae_Wiki_crocodile", "musae_Wiki_squirrel",
+                "grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia", 
+                "grand_Lung", "grand_Stomach", "grand_Lungcancer", "grand_Stomachcancer", "grand_KidneyCancer", 
+                "amazon_Photo", "amazon_Computer"]
     existing_dataset = cocitation_list + coauthor_list + LE_list + yelp_list + cornell_list + HGB_list
 
     @staticmethod
