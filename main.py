@@ -13,6 +13,7 @@ datasets = ["musae_Facebook", "musae_Github",
             "musae_Twitch_PT", "musae_Twitch_RU", "musae_Twitch_DE"]
 
 model = sys.argv[1]
+print(f"model name: {model}")
 
 # Update the dataset names and directories as needed
 for dataset in datasets:
