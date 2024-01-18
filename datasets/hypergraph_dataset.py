@@ -58,7 +58,7 @@ class HypergraphDataset(InMemoryDataset):
                 "musae_Twitch_PT", "musae_Twitch_RU", "musae_Twitch_DE",
                 "musae_Wiki_chameleon", "musae_Wiki_crocodile", "musae_Wiki_squirrel",
                 "grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia", 
-                "grand_Lung", "grand_Stomach", "grand_Lungcancer", "grand_Stomachcancer", "grand_KidneyCancer", 
+                "grand_Lung", "grand_Stomach", "grand_LungCancer", "grand_StomachCancer", "grand_KidneyCancer", 
                 "amazon_Photo", "amazon_Computer"]
     existing_dataset = cocitation_list + coauthor_list + LE_list + yelp_list + cornell_list + HGB_list
 
