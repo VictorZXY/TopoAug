@@ -8,9 +8,9 @@ import sys
 #             "grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia", 
 #             "grand_Lung", "grand_Stomach", "grand_LungCancer", "grand_StomachCancer", "grand_KidneyCancer", 
 #             "amazon_Photo", "amazon_Computer"]
-datasets = ["musae_Facebook", "musae_Github", 
-            "musae_Twitch_FR", "musae_Twitch_EN", "musae_Twitch_ES",
-            "musae_Twitch_PT", "musae_Twitch_RU", "musae_Twitch_DE"]
+datasets = ["grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia", 
+            "grand_Lung", "grand_Stomach", "grand_LungCancer", "grand_StomachCancer", "grand_KidneyCancer", 
+            "amazon_Photo", "amazon_Computer"]
 
 model = sys.argv[1]
 print(f"model name: {model}")
