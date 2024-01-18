@@ -98,7 +98,7 @@ grand_Leukemia:
 
 grand_LungCancer:
   type: Grand
-  name: Lung_Cancer
+  name: Lung_cancer
   root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
   # root: data/grand  # Local
   single_graph: true
@@ -112,7 +112,7 @@ grand_LungCancer:
 
 grand_StomachCancer:
   type: Grand
-  name: Stomach_Cancer
+  name: Stomach_cancer
   root: /work/ec249/ec249/xz9118/Projects/graph-cross-attention/data/grand  # Cirrus HPC
   # root: data/grand  # Local
   single_graph: true
