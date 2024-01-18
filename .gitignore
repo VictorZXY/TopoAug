@@ -171,7 +171,7 @@ data/
 data_raw/
 data_reformatted/
 playground.*
-slurm
+slurm/
 *.out
 *.pt
 *.slurm
