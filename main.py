@@ -1,16 +1,14 @@
 import subprocess
 import sys
 
-# datasets = ["musae_Facebook", "musae_Github", 
+# datasets = ["musae_Facebook", "musae_Github",
 #             "musae_Twitch_FR", "musae_Twitch_EN", "musae_Twitch_ES",
 #             "musae_Twitch_PT", "musae_Twitch_RU", "musae_Twitch_DE",
 #             "musae_Wiki_chameleon", "musae_Wiki_crocodile", "musae_Wiki_squirrel",
-#             "grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia", 
-#             "grand_Lung", "grand_Stomach", "grand_LungCancer", "grand_StomachCancer", "grand_KidneyCancer", 
-#             "amazon_Photo", "amazon_Computer"]
-datasets = ["grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia", 
-            "grand_Lung", "grand_Stomach", "grand_LungCancer", "grand_StomachCancer", "grand_KidneyCancer", 
-            "amazon_Photo", "amazon_Computer"]
+#             "grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia",
+#             "grand_Lung", "grand_Stomach", "grand_LungCancer", "grand_StomachCancer", "grand_KidneyCancer",
+#             "amazon_Photo", "amazon_Computer", "benchmark_Cora_Author", "benchmark_Cora_Cite", "benchmark_Pubmed"]
+datasets = ["benchmark_Cora_Author", "benchmark_Cora_Cite", "benchmark_Pubmed"]
 
 model = sys.argv[1]
 
@@ -22,7 +20,7 @@ for dataset in datasets:
 
     # Local
     # data_dir = f"data_reformatted/{dataset.lower()}"
-    # raw_data_dir = f"data_raw/"
+    # raw_data_dir = f"data_reformatted/"
 
     command = f"CUDA_VISIBLE_DEVICES='2' python train.py --method {model} --dname {dataset} " \
               f"--All_num_layers 2 --MLP_num_layers 2 --MLP2_num_layers 2 --MLP3_num_layers 2 " \

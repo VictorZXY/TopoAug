@@ -59,7 +59,7 @@ class HypergraphDataset(InMemoryDataset):
                 "musae_Wiki_chameleon", "musae_Wiki_crocodile", "musae_Wiki_squirrel",
                 "grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia", 
                 "grand_Lung", "grand_Stomach", "grand_LungCancer", "grand_StomachCancer", "grand_KidneyCancer", 
-                "amazon_Photo", "amazon_Computer"]
+                "amazon_Photo", "amazon_Computer", "benchmark_Cora_Author", "benchmark_Cora_Cite", "benchmark_Pubmed"]
     existing_dataset = cocitation_list + coauthor_list + LE_list + yelp_list + cornell_list + HGB_list
 
     @staticmethod
