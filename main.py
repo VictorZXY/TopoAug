@@ -16,7 +16,7 @@ model = sys.argv[1]
 for dataset in datasets:
     # Cirrus HPC
     data_dir = f"/work/ec249/ec249/xz9118/Projects/graph-cross-attention/data_reformatted/{dataset.lower()}"
-    raw_data_dir = f"/work/ec249/ec249/xz9118/Projects/graph-cross-attention/data_raw/"
+    raw_data_dir = f"/work/ec249/ec249/xz9118/Projects/graph-cross-attention/data_reformatted/raw/"
 
     # Local
     # data_dir = f"data_reformatted/{dataset.lower()}"
