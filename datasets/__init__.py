@@ -11,6 +11,7 @@ from datasets.data_utils import (
 )
 from datasets.formatters import GraphFormatter, HierachicyConstructor
 from datasets.grand import Grand
+from datasets.graph_stats import GraphStats
 from datasets.hypergraph_dataset import AddHypergraphSelfLoops, HypergraphDataset, HypergraphDiffusionDataset
 from datasets.musae import GitHub, Facebook, Twitch, Wikipedia
 from datasets.ogb import OGB
@@ -23,7 +24,7 @@ from datasets.samplers import (
     RandomHyperedgeSampler
 )
 from datasets.splitters import mask_split, random_node_split, create_edge_label
-from datasets.standard import Benchmark, GraphStats
+from datasets.standard import Benchmark
 
 __all__ = ['Grand', 'GitHub', 'Facebook', 'Twitch', 'Wikipedia', 'Amazon', "OGB",
            'Benchmark', 'GraphStats', 'GraphFormatter', "HierachicyConstructor",
