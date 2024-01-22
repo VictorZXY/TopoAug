@@ -13,7 +13,6 @@ datasets = ["grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_
             "amazon_Photo", "amazon_Computer"]
 
 model = sys.argv[1]
-print(f"model name: {model}")
 
 # Update the dataset names and directories as needed
 for dataset in datasets:

@@ -55,7 +55,7 @@ def main(args):
     else:
         transform = None
 
-    print(f"dataset name: {args.dname} ")
+    print(f"dataset name: {args.dname}")
     data = datasets.HypergraphDataset(root=args.data_dir, name=args.dname, path_to_download=args.raw_data_dir,
                                       feature_noise=args.feature_noise, transform=transform).data
     data_info = None
@@ -92,6 +92,7 @@ def main(args):
                 data.y, train_prop=args.train_prop, valid_prop=args.valid_prop)
         split_idx_lst.append(split_idx)
 
+    print(f"model name: {args.method}")
     if args.method == 'AllSetTransformer':
         if args.AllSet_LearnMask:
             model = SetGNN(data.num_features, data.num_classes, args, data.norm)
