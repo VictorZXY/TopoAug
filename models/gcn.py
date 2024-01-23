@@ -19,6 +19,12 @@ class GCNNet(torch.nn.Module):
         else:
             self.conv2 = GCNConv(dim, info["num_classes"])
 
+    def reset_parameters(self):
+        self.conv1.reset_parameters()
+        self.conv2.reset_parameters()
+        if self.is_regression:
+            self.head.reset_parameters()
+
     def forward(self, data, *args, **kwargs):
         x, edge_index = data.x, data.edge_index
         if self.is_edge_pred:
