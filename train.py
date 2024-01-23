@@ -11,8 +11,9 @@ import torch_geometric
 import datasets
 import utils
 from models import (
-    EquivSetGNN, HCHA, HNHN, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII,
-    LPGCNEDGNN, LPGATEDGNN, LPSAGEEDGNN, LPSAGEHyperGCN, LPSAGEGCN, LPSAGEGAT, LPSAGESAGE, LPEDGNNHyper, LPEDGNNEDGNN
+    EquivSetGNN, HCHA, HNHN, HyperConv, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII,
+    GCNNet, GATNet, SAGENet, LPSAGEGCN, LPSAGEGAT, LPSAGESAGE,
+    LPGCNEDGNN, LPGATEDGNN, LPSAGEEDGNN, LPSAGEHyperConv, LPEDGNNEDGNN, LPEDGNNHyperConv
 )
 
 
@@ -70,7 +71,7 @@ def main(args):
     elif args.method in ['LPGCNEDGNN', 'LPGATEDGNN', 'LPSAGEEDGNN', 'LPEDGNNHyper']:
         hgb_data, data_info = datasets.get_dataset_single(args.dname)
         data = (hgb_data, data)
-    elif args.method in ['LPSAGEHyperGCN', 'LPSAGEGCN', 'LPSAGEGAT', 'LPSAGESAGE']:
+    elif args.method in ['GCN', 'GAT', 'SAGE', 'HyperConv', 'LPSAGEGCN', 'LPSAGEGAT', 'LPSAGESAGE', 'LPSAGEHyper']:
         data, data_info = datasets.get_dataset_single(args.dname)
     elif args.method == 'LPEDGNNEDGNN':
         _, data_info = datasets.get_dataset_single(args.dname)
@@ -107,9 +108,9 @@ def main(args):
             model = SetGNN(data.num_features, data.num_classes, args)
     elif args.method in ['HGNN', 'HCHA']:
         model = HCHA(data.num_features, data.num_classes, args)
-    elif args.method in 'HNHN':
+    elif args.method == 'HNHN':
         model = HNHN(data.num_features, data.num_classes, args)
-    elif args.method in 'HyperGCN':
+    elif args.method == 'HyperGCN':
         model = HyperGCN(data.num_features, data.num_classes, args)
     elif args.method == 'HyperSAGE':
         model = HyperSAGE(data.num_features, data.num_classes, args)
@@ -121,6 +122,18 @@ def main(args):
         model = HyperND(data.num_features, data.num_classes, args)
     elif args.method == 'EDGNN':
         model = EquivSetGNN(data.num_features, data.num_classes, args)
+    elif args.method == 'GCN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = GCNNet(data_info, args)
+    elif args.method == 'GAT':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = GATNet(data_info, args)
+    elif args.method == 'SAGE':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = SAGENet(data_info, args)
+    elif args.method == 'HyperConv':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = HyperConv(data_info, args)
     elif args.method == 'LPGCNEDGNN':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPGCNEDGNN(data_info, args)
@@ -130,9 +143,9 @@ def main(args):
     elif args.method == 'LPSAGEEDGNN':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPSAGEEDGNN(data_info, args)
-    elif args.method == 'LPSAGEHyperGCN':
+    elif args.method == 'LPSAGEHyper':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPSAGEHyperGCN(data_info, args)
+        model = LPSAGEHyperConv(data_info, args)
     elif args.method == 'LPSAGEGCN':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPSAGEGCN(data_info, args)
@@ -144,7 +157,7 @@ def main(args):
         model = LPSAGESAGE(data_info, args)
     elif args.method == 'LPEDGNNHyper':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPEDGNNHyper(data_info, args)
+        model = LPEDGNNHyperConv(data_info, args)
     elif args.method == 'LPEDGNNEDGNN':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPEDGNNEDGNN(data_info, args)
