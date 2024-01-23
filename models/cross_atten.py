@@ -6,7 +6,7 @@ from torch_geometric.nn import GCNConv, GAT, SAGEConv, HypergraphConv
 from models.attention import Attention
 
 
-class CAGCNHyperGCN(torch.nn.Module):
+class CAGCNHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 32
@@ -64,7 +64,7 @@ class CAGCNHyperGCN(torch.nn.Module):
         return x
 
 
-class CAGATHyperGCN(torch.nn.Module):
+class CAGATHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 32
@@ -122,7 +122,7 @@ class CAGATHyperGCN(torch.nn.Module):
         return x
 
 
-class CASAGEHyperGCN(torch.nn.Module):
+class CASAGEHyperConv(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()

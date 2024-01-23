@@ -6,7 +6,7 @@ from torch_geometric.nn import GCNConv, GAT, SAGEConv, HypergraphConv
 from models.edgnn import EquivSetGNN
 
 
-class LPGCNHyperGCN(torch.nn.Module):
+class LPGCNHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -50,7 +50,7 @@ class LPGCNHyperGCN(torch.nn.Module):
         return x
 
 
-class LPGATHyperGCN(torch.nn.Module):
+class LPGATHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -94,7 +94,7 @@ class LPGATHyperGCN(torch.nn.Module):
         return x
 
 
-class LPSAGEHyperGCN(torch.nn.Module):
+class LPSAGEHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -532,7 +532,7 @@ class LPGCNGCN(torch.nn.Module):
         return x
 
 
-class LPHyperHyper(torch.nn.Module):
+class LPHyperConvHyperConv(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
@@ -577,7 +577,7 @@ class LPHyperHyper(torch.nn.Module):
         return x
 
 
-class LPEDGNNHyper(torch.nn.Module):
+class LPEDGNNHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
