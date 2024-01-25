@@ -12,8 +12,8 @@ import datasets
 import utils
 from models import (
     EquivSetGNN, HCHA, HNHN, HyperConv, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII,
-    GCNNet, GATNet, SAGENet, LPSAGEGCN, LPSAGEGAT, LPSAGESAGE,
-    LPGCNEDGNN, LPGATEDGNN, LPSAGEEDGNN, LPSAGEHyperConv, LPEDGNNEDGNN, LPEDGNNHyperConv
+    GCNNet, GATNet, SAGENet, LPGATGCN, LPSAGEGCN, LPSAGEGAT, LPSAGESAGE, LPEDGNNHyperConv, LPEDGNNEDGNN,
+    LPGCNHyperConv, LPGCNEDGNN, LPGATHyperConv, LPGATEDGNN, LPSAGEHyperConv, LPSAGEEDGNN
 )
 
 
@@ -71,7 +71,9 @@ def main(args):
     elif args.method in ['LPGCNEDGNN', 'LPGATEDGNN', 'LPSAGEEDGNN', 'LPEDGNNHyper']:
         hgb_data, data_info = datasets.get_dataset_single(args.dname)
         data = (hgb_data, data)
-    elif args.method in ['GCN', 'GAT', 'SAGE', 'HyperConv', 'LPSAGEGCN', 'LPSAGEGAT', 'LPSAGESAGE', 'LPSAGEHyper']:
+    elif args.method in ['GCN', 'GAT', 'SAGE', 'HyperConv',
+                         'LPGATGCN', 'LPSAGEGCN', 'LPSAGEGAT', 'LPSAGESAGE',
+                         'LPGCNHyper', 'LPGATHyper', 'LPSAGEHyper']:
         data, data_info = datasets.get_dataset_single(args.dname)
     elif args.method == 'LPEDGNNEDGNN':
         _, data_info = datasets.get_dataset_single(args.dname)
@@ -134,18 +136,9 @@ def main(args):
     elif args.method == 'HyperConv':
         assert data_info is not None, 'data_info has not been loaded'
         model = HyperConv(data_info, args)
-    elif args.method == 'LPGCNEDGNN':
+    elif args.method == 'LPGATGCN':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPGCNEDGNN(data_info, args)
-    elif args.method == 'LPGATEDGNN':
-        assert data_info is not None, 'data_info has not been loaded'
-        model = LPGATEDGNN(data_info, args)
-    elif args.method == 'LPSAGEEDGNN':
-        assert data_info is not None, 'data_info has not been loaded'
-        model = LPSAGEEDGNN(data_info, args)
-    elif args.method == 'LPSAGEHyper':
-        assert data_info is not None, 'data_info has not been loaded'
-        model = LPSAGEHyperConv(data_info, args)
+        model = LPGATGCN(data_info, args)
     elif args.method == 'LPSAGEGCN':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPSAGEGCN(data_info, args)
@@ -155,6 +148,24 @@ def main(args):
     elif args.method == 'LPSAGESAGE':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPSAGESAGE(data_info, args)
+    elif args.method == 'LPGCNHyper':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPGCNHyperConv(data_info, args)
+    elif args.method == 'LPGCNEDGNN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPGCNEDGNN(data_info, args)
+    elif args.method == 'LPGATHyper':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPGATHyperConv(data_info, args)
+    elif args.method == 'LPGATEDGNN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPGATEDGNN(data_info, args)
+    elif args.method == 'LPSAGEHyper':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPSAGEHyperConv(data_info, args)
+    elif args.method == 'LPSAGEEDGNN':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPSAGEEDGNN(data_info, args)
     elif args.method == 'LPEDGNNHyper':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPEDGNNHyperConv(data_info, args)
