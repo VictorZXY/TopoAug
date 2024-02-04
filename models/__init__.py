@@ -18,6 +18,7 @@ from models.linear_probe import (
     LPGCNGCN, LPGATGAT, LPGATGCN, LPSAGEGAT, LPSAGEGCN, LPSAGESAGE,
     LPHyperConvHyperConv, LPEDGNNHyperConv, LPEDGNNEDGNN
 )
+from models.linear_probe_ablation import LPGCNHyperConvAblation, LPGCNEDGNNAblation
 from models.unigcn2 import UniGCNII
 
 factory = {

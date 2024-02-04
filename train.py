@@ -13,7 +13,8 @@ import utils
 from models import (
     EquivSetGNN, HCHA, HNHN, HyperConv, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII,
     GCNNet, GATNet, SAGENet, LPGATGCN, LPSAGEGCN, LPSAGEGAT, LPSAGESAGE, LPEDGNNHyperConv, LPEDGNNEDGNN,
-    LPGCNHyperConv, LPGCNEDGNN, LPGATHyperConv, LPGATEDGNN, LPSAGEHyperConv, LPSAGEEDGNN
+    LPGCNHyperConv, LPGCNEDGNN, LPGATHyperConv, LPGATEDGNN, LPSAGEHyperConv, LPSAGEEDGNN,
+    LPGCNHyperConvAblation, LPGCNEDGNNAblation
 )
 
 
@@ -68,12 +69,12 @@ def main(args):
         data = HyperSAGE.generate_hyperedge_dict(data)
     elif args.method == 'LEGCN':
         data = LEGCN.line_expansion(data)
-    elif args.method in ['LPGCNEDGNN', 'LPGATEDGNN', 'LPSAGEEDGNN', 'LPEDGNNHyper']:
+    elif args.method in ['LPGCNEDGNN', 'LPGATEDGNN', 'LPSAGEEDGNN', 'LPEDGNNHyper', 'LPGCNEDGNNAblation']:
         hgb_data, data_info = datasets.get_dataset_single(args.dname)
         data = (hgb_data, data)
     elif args.method in ['GCN', 'GAT', 'SAGE', 'HyperConv',
                          'LPGATGCN', 'LPSAGEGCN', 'LPSAGEGAT', 'LPSAGESAGE',
-                         'LPGCNHyper', 'LPGATHyper', 'LPSAGEHyper']:
+                         'LPGCNHyper', 'LPGATHyper', 'LPSAGEHyper', 'LPGCNHyperAblation']:
         data, data_info = datasets.get_dataset_single(args.dname)
     elif args.method == 'LPEDGNNEDGNN':
         _, data_info = datasets.get_dataset_single(args.dname)
@@ -172,6 +173,12 @@ def main(args):
     elif args.method == 'LPEDGNNEDGNN':
         assert data_info is not None, 'data_info has not been loaded'
         model = LPEDGNNEDGNN(data_info, args)
+    elif args.method == 'LPGCNHyperAblation':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPGCNHyperConvAblation(data_info, args)
+    elif args.method == 'LPGCNEDGNNAblation':
+        assert data_info is not None, 'data_info has not been loaded'
+        model = LPGCNEDGNNAblation(data_info, args)
     else:
         raise ValueError(f'Undefined model name: {args.method}')
     model = model.to(device)
