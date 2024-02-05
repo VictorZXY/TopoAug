@@ -17,6 +17,8 @@ from models import (
     LPGCNHyperConvAblation, LPGCNEDGNNAblation
 )
 
+import utils_graphaug as graphaug
+
 
 @torch.no_grad()
 def evaluate(model, data, split_idx, evaluator, loss_fn=None, return_out=False):
@@ -84,6 +86,16 @@ def main(args):
     else:
         data = data.to(device)
 
+    if args.method in ['GCN', 'GAT', 'SAGE']:
+        print(f"Augment: {args.Augment}")
+        if args.Augment in ['NodeDrop','NodeMixUp','EdgeDrop','NodeFeatureMasking']:
+            assert args.Augment in ['NodeDrop', 'EdgeDrop', 'NodeMixUp', 'NodeFeatureMasking']
+            params = {'classes': data_info['num_classes'],'lamb':0.9} if args.Augment == 'NodeMixUp' else {}
+
+            augmentor = getattr(graphaug, args.Augment)(**params)
+            data = augmentor(data)
+            print(f"Augmented data ({args.Augment}): {data}")
+
     # Get splits
     split_idx_lst = []
     for run in range(args.runs):
@@ -96,7 +108,10 @@ def main(args):
                 data.y, train_prop=args.train_prop, valid_prop=args.valid_prop)
         split_idx_lst.append(split_idx)
 
+
+
     print(f"model name: {args.method}")
+    print(f"data: {data}")
     if args.method == 'AllSetTransformer':
         if args.AllSet_LearnMask:
             model = SetGNN(data.num_features, data.num_classes, args, data.norm)
@@ -184,6 +199,7 @@ def main(args):
     model = model.to(device)
     print("# Params:", sum(p.numel() for p in model.parameters() if p.requires_grad))
 
+
     logger = utils.Logger(args.runs, args)
 
     loss_fn = nn.NLLLoss()
@@ -227,8 +243,9 @@ def main(args):
 
         end_time = time.time()
         runtime_list.append(end_time - start_time)
-
+    print(f"Training {args.method} on {args.dname} with {args.Augment} augmentation")
     logger.print_statistics()
+    print("========================================")
 
 
 if __name__ == '__main__':
@@ -307,6 +324,7 @@ if __name__ == '__main__':
     parser.add_argument('--HyperND_ord', default=1., type=float)
     parser.add_argument('--HyperND_tol', default=1e-4, type=float)
     parser.add_argument('--HyperND_steps', default=100, type=int)
+    parser.add_argument('--Augment', default='NULL')
 
     parser.set_defaults(add_self_loop=True)
     parser.set_defaults(exclude_self=False)
