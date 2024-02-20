@@ -12,7 +12,7 @@ import sys
 #             "amazon_Photo", "amazon_Computer", "benchmark_Cora_Author", "benchmark_Cora_Cite", "benchmark_Pubmed"]
 datasets = ["musae_Github", "musae_Twitch_DE", "grand_Brain", "grand_LungCancer", "benchmark_Cora_Cite", 
             "amazon_Computer"]
-augmentations =  ['NodeDrop', 'EdgeDrop', 'NodeMixUp', 'NodeFeatureMasking','NULL']
+augmentations = ['NULL', 'NodeDrop', 'EdgeDrop', 'NodeMixUp', 'NodeFeatureMasking']
 
 # Retrieve the model from the command line arguments
 model = sys.argv[1]
