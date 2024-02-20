@@ -10,14 +10,13 @@ import torch_geometric
 
 import datasets
 import utils
+from augmentations import utils_graphaug as graphaug
 from models import (
     EquivSetGNN, HCHA, HNHN, HyperConv, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII,
     GCNNet, GATNet, SAGENet, LPGATGCN, LPSAGEGCN, LPSAGEGAT, LPSAGESAGE, LPEDGNNHyperConv, LPEDGNNEDGNN,
     LPGCNHyperConv, LPGCNEDGNN, LPGATHyperConv, LPGATEDGNN, LPSAGEHyperConv, LPSAGEEDGNN,
     LPGCNHyperConvAblation, LPGCNEDGNNAblation
 )
-
-import utils_graphaug as graphaug
 
 
 @torch.no_grad()
@@ -59,7 +58,7 @@ def main(args):
     else:
         transform = None
 
-    print(f"dataset name: {args.dname}")
+    print(f"Dataset name: {args.dname}")
     data = datasets.HypergraphDataset(root=args.data_dir, name=args.dname, path_to_download=args.raw_data_dir,
                                       feature_noise=args.feature_noise, transform=transform).data
     data_info = None
@@ -80,21 +79,21 @@ def main(args):
         data, data_info = datasets.get_dataset_single(args.dname)
     elif args.method == 'LPEDGNNEDGNN':
         _, data_info = datasets.get_dataset_single(args.dname)
-    print(data)
+    print(f"Data: {data}")
     if isinstance(data, tuple):
         data = tuple(map(lambda item: item.to(device), data))
     else:
         data = data.to(device)
 
     if args.method in ['GCN', 'GAT', 'SAGE']:
-        print(f"Augment: {args.Augment}")
-        if args.Augment in ['NodeDrop','NodeMixUp','EdgeDrop','NodeFeatureMasking']:
-            assert args.Augment in ['NodeDrop', 'EdgeDrop', 'NodeMixUp', 'NodeFeatureMasking']
-            params = {'classes': data_info['num_classes'],'lamb':0.9} if args.Augment == 'NodeMixUp' else {}
+        print(f"Augmentation name: {args.augment}")
+        if args.augment in ['NodeDrop', 'NodeMixUp', 'EdgeDrop', 'NodeFeatureMasking']:
+            assert args.augment in ['NodeDrop', 'EdgeDrop', 'NodeMixUp', 'NodeFeatureMasking']
+            params = {'classes': data_info['num_classes'], 'lamb': 0.9} if args.augment == 'NodeMixUp' else {}
 
-            augmentor = getattr(graphaug, args.Augment)(**params)
+            augmentor = getattr(graphaug, args.augment)(**params)
             data = augmentor(data)
-            print(f"Augmented data ({args.Augment}): {data}")
+            print(f"Augmented data ({args.augment}): {data}")
 
     # Get splits
     split_idx_lst = []
@@ -108,10 +107,7 @@ def main(args):
                 data.y, train_prop=args.train_prop, valid_prop=args.valid_prop)
         split_idx_lst.append(split_idx)
 
-
-
     print(f"model name: {args.method}")
-    print(f"data: {data}")
     if args.method == 'AllSetTransformer':
         if args.AllSet_LearnMask:
             model = SetGNN(data.num_features, data.num_classes, args, data.norm)
@@ -199,7 +195,6 @@ def main(args):
     model = model.to(device)
     print("# Params:", sum(p.numel() for p in model.parameters() if p.requires_grad))
 
-
     logger = utils.Logger(args.runs, args)
 
     loss_fn = nn.NLLLoss()
@@ -243,7 +238,7 @@ def main(args):
 
         end_time = time.time()
         runtime_list.append(end_time - start_time)
-    print(f"Training {args.method} on {args.dname} with {args.Augment} augmentation")
+    print(f"Finish training {args.method} on {args.dname} with {args.augment} augmentation")
     logger.print_statistics()
     print("========================================")
 
@@ -258,6 +253,7 @@ if __name__ == '__main__':
     parser.add_argument('--dname', default='walmart-trips-100')
     parser.add_argument('--data_dir', type=str, required=True)
     parser.add_argument('--raw_data_dir', type=str, required=True)
+    parser.add_argument('--augment', default='NULL')
     parser.add_argument('--train_prop', type=float, default=0.5)
     parser.add_argument('--valid_prop', type=float, default=0.25)
     parser.add_argument('--feature_noise', default='1', type=str, help='std for synthetic feature noise')
@@ -324,7 +320,6 @@ if __name__ == '__main__':
     parser.add_argument('--HyperND_ord', default=1., type=float)
     parser.add_argument('--HyperND_tol', default=1e-4, type=float)
     parser.add_argument('--HyperND_steps', default=100, type=int)
-    parser.add_argument('--Augment', default='NULL')
 
     parser.set_defaults(add_self_loop=True)
     parser.set_defaults(exclude_self=False)

@@ -1,5 +1,5 @@
-import subprocess
 import multiprocessing
+import subprocess
 import sys
 
 # Define the datasets and augmentations
@@ -10,12 +10,13 @@ import sys
 #             "grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia",
 #             "grand_Lung", "grand_Stomach", "grand_LungCancer", "grand_StomachCancer", "grand_KidneyCancer",
 #             "amazon_Photo", "amazon_Computer", "benchmark_Cora_Author", "benchmark_Cora_Cite", "benchmark_Pubmed"]
-datasets = ["musae_Github", "musae_Twitch_DE", "grand_Brain", "grand_LungCancer", "benchmark_Cora_Cite", 
+datasets = ["musae_Github", "musae_Twitch_DE", "grand_Brain", "grand_LungCancer", "benchmark_Cora_Cite",
             "amazon_Computer"]
 augmentations = ['NULL', 'NodeDrop', 'EdgeDrop', 'NodeMixUp', 'NodeFeatureMasking']
 
 # Retrieve the model from the command line arguments
 model = sys.argv[1]
+
 
 # Function to run the subprocess with output redirected to a file
 def run_process(dataset, augmentation, model):
@@ -38,12 +39,13 @@ def run_process(dataset, augmentation, model):
     with open(f'out/{dataset}-{model}-{augmentation}.out', 'w') as outfile:
         subprocess.run(command, shell=True, check=True, stdout=outfile, stderr=subprocess.STDOUT)
 
+
 # Limit for the number of processes
-process_limit = 64  # Adjust this number based on your system's capabilities
+NUM_PROCESSES_LIMIT = 64  # Adjust this number based on your system's capabilities
 
 # Create a pool of workers with the specified limit and run processes
 if __name__ == "__main__":
-    pool = multiprocessing.Pool(process_limit)
+    pool = multiprocessing.Pool(NUM_PROCESSES_LIMIT)
     for dataset in datasets:
         for aug in augmentations:
             pool.apply_async(run_process, args=(dataset, aug, model))

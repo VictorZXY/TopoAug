@@ -8,10 +8,10 @@ import sys
 #             "grand_ArteryAorta", "grand_ArteryCoronary", "grand_Breast", "grand_Brain", "grand_Leukemia",
 #             "grand_Lung", "grand_Stomach", "grand_LungCancer", "grand_StomachCancer", "grand_KidneyCancer",
 #             "amazon_Photo", "amazon_Computer", "benchmark_Cora_Author", "benchmark_Cora_Cite", "benchmark_Pubmed"]
-datasets = ["musae_Github", "musae_Twitch_DE", "grand_Brain", "grand_LungCancer", "benchmark_Cora_Cite", 
+datasets = ["musae_Github", "musae_Twitch_DE", "grand_Brain", "grand_LungCancer", "benchmark_Cora_Cite",
             "amazon_Computer"]
 
-augmentations  = ['NULL', 'NodeDrop', 'EdgeDrop', 'NodeMixUp', 'NodeFeatureMasking']
+augmentations = ['NULL', 'NodeDrop', 'EdgeDrop', 'NodeMixUp', 'NodeFeatureMasking']
 
 model = sys.argv[1]
 
