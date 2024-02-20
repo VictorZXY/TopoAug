@@ -24,6 +24,7 @@ for dataset in datasets:
     # Local
     # data_dir = f"data_reformatted/{dataset.lower()}"
     # raw_data_dir = f"data_reformatted/"
+
     for aug in augmentations:
         command = f"python train.py --method {model} --dname {dataset} --augment {aug}" \
                   f"--All_num_layers 2 --MLP_num_layers 2 --MLP2_num_layers 2 --MLP3_num_layers 2 " \
