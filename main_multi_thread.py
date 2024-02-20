@@ -29,7 +29,7 @@ def run_process(dataset, augmentation, model):
     # raw_data_dir = f"data_reformatted/"
 
     # Construct the command
-    command = f"python train.py --method {model} --dname {dataset} --augment {augmentation}" \
+    command = f"python train.py --method {model} --dname {dataset} --augment {augmentation} " \
               f"--All_num_layers 2 --MLP_num_layers 2 --MLP2_num_layers 2 --MLP3_num_layers 2 " \
               f"--Classifier_num_layers 2 --MLP_hidden 256 --Classifier_hidden 64 --aggregate mean " \
               f"--restart_alpha 0.5 --lr 0.001 --wd 0 --epochs 500 --runs 2 --feature_noise 1.0 --cuda 0 " \

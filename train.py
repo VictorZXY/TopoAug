@@ -10,7 +10,9 @@ import torch_geometric
 
 import datasets
 import utils
-from augmentations import utils_graphaug as graphaug
+from augmentations import (
+    EdgeDrop, NodeDrop, NodeFeatureMasking, NodeMixUp
+)
 from models import (
     EquivSetGNN, HCHA, HNHN, HyperConv, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII,
     GCNNet, GATNet, SAGENet, LPGATGCN, LPSAGEGCN, LPSAGEGAT, LPSAGESAGE, LPEDGNNHyperConv, LPEDGNNEDGNN,
@@ -85,15 +87,23 @@ def main(args):
     else:
         data = data.to(device)
 
-    if args.method in ['GCN', 'GAT', 'SAGE']:
+    # Graph augmentations are only applicable on simple-GNNs
+    if args.method in ['GCN', 'GAT', 'SAGE'] and args.augment != 'NULL':
         print(f"Augmentation name: {args.augment}")
-        if args.augment in ['NodeDrop', 'NodeMixUp', 'EdgeDrop', 'NodeFeatureMasking']:
-            assert args.augment in ['NodeDrop', 'EdgeDrop', 'NodeMixUp', 'NodeFeatureMasking']
-            params = {'classes': data_info['num_classes'], 'lamb': 0.9} if args.augment == 'NodeMixUp' else {}
-
-            augmentor = getattr(graphaug, args.augment)(**params)
-            data = augmentor(data)
-            print(f"Augmented data ({args.augment}): {data}")
+        if args.augment == 'NodeDrop':
+            augmentor = NodeDrop()
+        elif args.augment == 'EdgeDrop':
+            augmentor = EdgeDrop()
+        elif args.augment == 'NodeMixUp':
+            assert data_info is not None, 'data_info has not been loaded'
+            augmentor = NodeMixUp(lamb=0.9, classes=data_info['num_classes'])
+        elif args.augment == 'NodeFeatureMasking':
+            augmentor = NodeFeatureMasking()
+        else:
+            raise ValueError(f'Undefined augmentation name: {args.augment}')
+        augmentor = augmentor.to(device)
+        data = augmentor(data)
+        print(f"Augmented data ({args.augment}): {data}")
 
     # Get splits
     split_idx_lst = []
