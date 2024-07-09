@@ -6,7 +6,7 @@ from torch_geometric.nn import GCNConv, HypergraphConv
 from models.edgnn import EquivSetGNN
 
 
-class LPGCNHyperConvAblation(torch.nn.Module):
+class TAGCNHyperConvAblation(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -50,13 +50,13 @@ class LPGCNHyperConvAblation(torch.nn.Module):
         return x
 
 
-class LPGCNEDGNNAblation(torch.nn.Module):
+class TAGCNEDGNNAblation(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
         self.hyper = EquivSetGNN(info["num_node_features"], dim, *args)
         self.is_regression = info["is_regression"]
-        # For LP-GCN+EDHNN, --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
+        # For TopoAug-GCN+EDHNN, --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
         if info["is_regression"]:
             self.conv1 = GCNConv(info["num_node_features"] + dim, dim)
             self.conv2 = GCNConv(dim, dim)

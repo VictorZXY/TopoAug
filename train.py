@@ -11,13 +11,12 @@ import torch_geometric
 import datasets
 import utils
 from augmentations import (
-    EdgeDrop, NodeDrop, NodeFeatureMasking, NodeMixUp
+    EdgeDrop, NodeDrop, NodeFeatureMasking, NodeMixUp, TAGATGCN, TASAGEGCN, TASAGEGAT, TASAGESAGE, TAEDGNNHyperConv,
+    TAEDGNNEDGNN, TAGCNHyperConv, TAGCNEDGNN, TAGATHyperConv, TAGATEDGNN, TASAGEHyperConv, TASAGEEDGNN,
+    TAGCNHyperConvAblation, TAGCNEDGNNAblation
 )
 from models import (
-    EquivSetGNN, HCHA, HNHN, HyperConv, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII,
-    GCNNet, GATNet, SAGENet, LPGATGCN, LPSAGEGCN, LPSAGEGAT, LPSAGESAGE, LPEDGNNHyperConv, LPEDGNNEDGNN,
-    LPGCNHyperConv, LPGCNEDGNN, LPGATHyperConv, LPGATEDGNN, LPSAGEHyperConv, LPSAGEEDGNN,
-    LPGCNHyperConvAblation, LPGCNEDGNNAblation
+    EquivSetGNN, HCHA, HNHN, HyperConv, HyperGCN, HyperND, HyperSAGE, LEGCN, SetGNN, UniGCNII, GCNNet, GATNet, SAGENet
 )
 
 
@@ -72,14 +71,14 @@ def main(args):
         data = HyperSAGE.generate_hyperedge_dict(data)
     elif args.method == 'LEGCN':
         data = LEGCN.line_expansion(data)
-    elif args.method in ['LPGCNEDGNN', 'LPGATEDGNN', 'LPSAGEEDGNN', 'LPEDGNNHyper', 'LPGCNEDGNNAblation']:
+    elif args.method in ['TAGCNEDGNN', 'TAGATEDGNN', 'TASAGEEDGNN', 'TAEDGNNHyper', 'TAGCNEDGNNAblation']:
         hgb_data, data_info = datasets.get_dataset_single(args.dname)
         data = (hgb_data, data)
     elif args.method in ['GCN', 'GAT', 'SAGE', 'HyperConv',
-                         'LPGATGCN', 'LPSAGEGCN', 'LPSAGEGAT', 'LPSAGESAGE',
-                         'LPGCNHyper', 'LPGATHyper', 'LPSAGEHyper', 'LPGCNHyperAblation']:
+                         'TAGATGCN', 'TASAGEGCN', 'TASAGEGAT', 'TASAGESAGE',
+                         'TAGCNHyper', 'TAGATHyper', 'TASAGEHyper', 'TAGCNHyperAblation']:
         data, data_info = datasets.get_dataset_single(args.dname)
-    elif args.method == 'LPEDGNNEDGNN':
+    elif args.method == 'TAEDGNNEDGNN':
         _, data_info = datasets.get_dataset_single(args.dname)
     print(f"Data: {data}")
     if isinstance(data, tuple):
@@ -158,48 +157,48 @@ def main(args):
     elif args.method == 'HyperConv':
         assert data_info is not None, 'data_info has not been loaded'
         model = HyperConv(data_info, args)
-    elif args.method == 'LPGATGCN':
+    elif args.method == 'TAGATGCN':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPGATGCN(data_info, args)
-    elif args.method == 'LPSAGEGCN':
+        model = TAGATGCN(data_info, args)
+    elif args.method == 'TASAGEGCN':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPSAGEGCN(data_info, args)
-    elif args.method == 'LPSAGEGAT':
+        model = TASAGEGCN(data_info, args)
+    elif args.method == 'TASAGEGAT':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPSAGEGAT(data_info, args)
-    elif args.method == 'LPSAGESAGE':
+        model = TASAGEGAT(data_info, args)
+    elif args.method == 'TASAGESAGE':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPSAGESAGE(data_info, args)
-    elif args.method == 'LPGCNHyper':
+        model = TASAGESAGE(data_info, args)
+    elif args.method == 'TAGCNHyper':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPGCNHyperConv(data_info, args)
-    elif args.method == 'LPGCNEDGNN':
+        model = TAGCNHyperConv(data_info, args)
+    elif args.method == 'TAGCNEDGNN':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPGCNEDGNN(data_info, args)
-    elif args.method == 'LPGATHyper':
+        model = TAGCNEDGNN(data_info, args)
+    elif args.method == 'TAGATHyper':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPGATHyperConv(data_info, args)
-    elif args.method == 'LPGATEDGNN':
+        model = TAGATHyperConv(data_info, args)
+    elif args.method == 'TAGATEDGNN':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPGATEDGNN(data_info, args)
-    elif args.method == 'LPSAGEHyper':
+        model = TAGATEDGNN(data_info, args)
+    elif args.method == 'TASAGEHyper':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPSAGEHyperConv(data_info, args)
-    elif args.method == 'LPSAGEEDGNN':
+        model = TASAGEHyperConv(data_info, args)
+    elif args.method == 'TASAGEEDGNN':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPSAGEEDGNN(data_info, args)
-    elif args.method == 'LPEDGNNHyper':
+        model = TASAGEEDGNN(data_info, args)
+    elif args.method == 'TAEDGNNHyper':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPEDGNNHyperConv(data_info, args)
-    elif args.method == 'LPEDGNNEDGNN':
+        model = TAEDGNNHyperConv(data_info, args)
+    elif args.method == 'TAEDGNNEDGNN':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPEDGNNEDGNN(data_info, args)
-    elif args.method == 'LPGCNHyperAblation':
+        model = TAEDGNNEDGNN(data_info, args)
+    elif args.method == 'TAGCNHyperAblation':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPGCNHyperConvAblation(data_info, args)
-    elif args.method == 'LPGCNEDGNNAblation':
+        model = TAGCNHyperConvAblation(data_info, args)
+    elif args.method == 'TAGCNEDGNNAblation':
         assert data_info is not None, 'data_info has not been loaded'
-        model = LPGCNEDGNNAblation(data_info, args)
+        model = TAGCNEDGNNAblation(data_info, args)
     else:
         raise ValueError(f'Undefined model name: {args.method}')
     model = model.to(device)

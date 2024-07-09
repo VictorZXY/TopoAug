@@ -6,7 +6,7 @@ from torch_geometric.nn import GCNConv, GAT, SAGEConv, HypergraphConv
 from models.edgnn import EquivSetGNN
 
 
-class LPGCNHyperConv(torch.nn.Module):
+class TAGCNHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -50,7 +50,7 @@ class LPGCNHyperConv(torch.nn.Module):
         return x
 
 
-class LPGATHyperConv(torch.nn.Module):
+class TAGATHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -94,7 +94,7 @@ class LPGATHyperConv(torch.nn.Module):
         return x
 
 
-class LPSAGEHyperConv(torch.nn.Module):
+class TASAGEHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -138,12 +138,12 @@ class LPSAGEHyperConv(torch.nn.Module):
         return x
 
 
-class LPGCNEDGNN(torch.nn.Module):
+class TAGCNEDGNN(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
         self.is_regression = info["is_regression"]
-        # For LP-GCN+EDHNN, --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
+        # For GCN+TopoAug(EDHNN), --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
         if info["is_regression"]:
             self.hyper = EquivSetGNN(info["num_node_features"], dim, *args)
             self.conv1 = GCNConv(info["num_node_features"], dim)
@@ -181,12 +181,12 @@ class LPGCNEDGNN(torch.nn.Module):
         return x
 
 
-class LPGATEDGNN(torch.nn.Module):
+class TAGATEDGNN(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
         self.is_regression = info["is_regression"]
-        # For LP-GAT+EDHNN, --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
+        # For GAT+TopoAug(EDHNN), --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
         if info["is_regression"]:
             self.hyper = EquivSetGNN(info["num_node_features"], dim, *args)
             self.conv1 = GAT(info["num_node_features"], dim, num_layers=1)
@@ -224,12 +224,12 @@ class LPGATEDGNN(torch.nn.Module):
         return x
 
 
-class LPSAGEEDGNN(torch.nn.Module):
+class TASAGEEDGNN(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
         self.is_regression = info["is_regression"]
-        # For LP-GraphSAGE+EDHNN, --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
+        # For GraphSAGE+TopoAug(EDHNN), --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
         if info["is_regression"]:
             self.hyper = EquivSetGNN(info["num_node_features"], dim, *args)
             self.conv1 = SAGEConv(info["num_node_features"], dim, normalize=False)
@@ -267,7 +267,7 @@ class LPSAGEEDGNN(torch.nn.Module):
         return x
 
 
-class LPSAGEGCN(torch.nn.Module):
+class TASAGEGCN(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -311,7 +311,7 @@ class LPSAGEGCN(torch.nn.Module):
         return x
 
 
-class LPSAGEGAT(torch.nn.Module):
+class TASAGEGAT(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -355,7 +355,7 @@ class LPSAGEGAT(torch.nn.Module):
         return x
 
 
-class LPSAGESAGE(torch.nn.Module):
+class TASAGESAGE(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -399,7 +399,7 @@ class LPSAGESAGE(torch.nn.Module):
         return x
 
 
-class LPGATGCN(torch.nn.Module):
+class TAGATGCN(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -443,7 +443,7 @@ class LPGATGCN(torch.nn.Module):
         return x
 
 
-class LPGATGAT(torch.nn.Module):
+class TAGATGAT(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
@@ -487,7 +487,7 @@ class LPGATGAT(torch.nn.Module):
         return x
 
 
-class LPGCNGCN(torch.nn.Module):
+class TAGCNGCN(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
@@ -532,7 +532,7 @@ class LPGCNGCN(torch.nn.Module):
         return x
 
 
-class LPHyperConvHyperConv(torch.nn.Module):
+class TAHyperConvHyperConv(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
@@ -577,12 +577,12 @@ class LPHyperConvHyperConv(torch.nn.Module):
         return x
 
 
-class LPEDGNNHyperConv(torch.nn.Module):
+class TAEDGNNHyperConv(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
         self.is_regression = info["is_regression"]
-        # For LP-EDHNN+HyperConv, --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
+        # For EDHNN+TopoAug(HyperConv), --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
         if info["is_regression"]:
             self.hyper = EquivSetGNN(info["num_node_features"], dim, *args)
             self.conv1 = HypergraphConv(info["num_node_features"], dim)
@@ -620,12 +620,12 @@ class LPEDGNNHyperConv(torch.nn.Module):
         return x
 
 
-class LPEDGNNEDGNN(torch.nn.Module):
+class TAEDGNNEDGNN(torch.nn.Module):
     def __init__(self, info, *args, **kwargs):
         super().__init__()
         dim = 64
         self.is_regression = info["is_regression"]
-        # For LP-EDHNN+EDHNN, --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
+        # For EDHNN+TopoAug(EDHNN), --Classifier_num_layers must be 2 and --Classifier_hidden for EDHNN must be 64
         if info["is_regression"]:
             self.hyper = EquivSetGNN(info["num_node_features"], dim, *args)
             self.conv = EquivSetGNN(info["num_node_features"], dim, *args)
